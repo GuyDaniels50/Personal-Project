@@ -68,3 +68,6 @@ summary(margin_proj1)
 
 margin_proj2 <- lm(win_margin ~ `FG%` + `FT%`, data = team_averages)
 summary(margin_proj2)
+
+margin_proj3 <- lm(win_margin ~ `2P%` + `3P%` + `FT%`, data = team_averages)
+summary(margin_proj3)
