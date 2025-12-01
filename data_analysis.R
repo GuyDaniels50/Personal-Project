@@ -14,3 +14,10 @@ team_averages |>
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1)
     )
+
+margin_proj1 <- lm(win_margin ~ 
+                     RPG + APG + STPG + BLKPG + TOPG, data = team_averages)
+summary(margin_proj1)
+
+margin_proj2 <- lm(win_margin ~ `FG%` + `FT%`, data = team_averages)
+summary(margin_proj2)
