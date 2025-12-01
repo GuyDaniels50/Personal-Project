@@ -5,7 +5,8 @@ library(performance)
 team_averages <- read_excel("NZNBL Team averages.xlsx")
 
 team_averages <- team_averages %>%
-  mutate(win_margin = PPG - `Ave Pts Agt`)
+  mutate(win_margin = PPG - `Ave Pts Agt`,
+         `3PTA` = `3PMPG` / `3P%` * 100)
 
 team_averages |> 
   ggplot(aes(x = Team, y = win_margin)) + 
@@ -33,6 +34,24 @@ team_averages |>
   theme(
   axis.text.x = element_text(angle = 45, hjust = 1)
   )
+
+team_averages |>
+  ggplot(aes(x = `FG%`, y = win_margin)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+
+fg_wm <- lm(win_margin ~ `FG%`, data = team_averages)
+summary(fg_wm)
+
+
+team_averages |>
+  ggplot(aes(x = `3PTA`, y = win_margin)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+
+a3_wm <- lm(win_margin ~ `3PTA`, data = team_averages)
+summary(a3_wm)
+
 
 margin_proj1 <- lm(win_margin ~ 
                      RPG + APG + STPG + BLKPG + TOPG, data = team_averages)
