@@ -53,6 +53,15 @@ a3_wm <- lm(win_margin ~ `3PTA`, data = team_averages)
 summary(a3_wm)
 
 
+team_averages |>
+  ggplot(aes(x = FTAPG, y = win_margin)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+
+fta_wm <- lm(win_margin ~ FTAPG, data = team_averages)
+summary(fta_wm)
+
+
 margin_proj1 <- lm(win_margin ~ 
                      RPG + APG + STPG + BLKPG + TOPG, data = team_averages)
 summary(margin_proj1)
