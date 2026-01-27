@@ -9,7 +9,7 @@ team_averages <- team_averages %>%
          `3PTA` = `3PMPG` / `3P%` * 100)
 
 team_averages |> 
-  ggplot(aes(x = Team, y = win_margin)) + 
+  ggplot(aes(x = reorder(Team, -win_margin), y = win_margin)) + 
   geom_col(
     aes(fill = win_margin >= 0)
   ) +
@@ -31,8 +31,9 @@ team_averages |>
     x = "Team",
     y = "Win Margin"
   ) +
+  theme_minimal() +
   theme(
-  axis.text.x = element_text(angle = 45, hjust = 1)
+    axis.text.x = element_text(angle = 45, hjust = 1)
   )
 
 team_averages |>
@@ -71,3 +72,4 @@ summary(margin_proj2)
 
 margin_proj3 <- lm(win_margin ~ `2P%` + `3P%` + `FT%`, data = team_averages)
 summary(margin_proj3)
+
